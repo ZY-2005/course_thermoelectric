@@ -1,31 +1,81 @@
 <!DOCTYPE html>
 <html lang="zh">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>基于AI与热电芯片的天气实时量化监测系统</title>
     <style>
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f9;
-        margin: 0;
-        padding: 0;
-      }
-      header {
-        background-color: #4caf50;
-        color: white;
-        padding: 20px;
-        text-align: center;
-      }
-      h1 {
-        margin: 0;
-        font-size: 2em;
-      }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+        }
+        h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+        #radarChart {
+            max-width: 600px;
+            max-height: 600px;
+            width: 100%;
+            height: auto;
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
+
     <header>
-      <h1>基于AI与热电芯片的天气实时量化监测系统</h1>
+        <h1>基于AI与热电芯片的天气实时量化监测系统</h1>
     </header>
-  </body>
+
+    <canvas id="radarChart"></canvas>
+
+    <!-- 引入 Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // 雷达图的数据和配置
+        const ctx = document.getElementById('radarChart').getContext('2d');
+        
+        const data = {
+            labels: ['温度', '湿度', '气压', '风速', '光照'], // 五个轴标签
+            datasets: [{
+                label: '实时天气数据',
+                data: [65, 75, 80, 70, 90], // 假数据
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        const options = {
+            responsive: true,
+            scale: {
+                ticks: {
+                    beginAtZero: true,
+                    max: 100
+                }
+            }
+        };
+
+        // 创建雷达图
+        const radarChart = new Chart(ctx, {
+            type: 'radar',
+            data: data,
+            options: options
+        });
+    </script>
+
+</body>
 </html>
